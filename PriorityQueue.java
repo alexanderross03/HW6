@@ -1,7 +1,7 @@
 
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Alexander Ross/ 001
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -150,10 +150,16 @@ class PriorityQueue<E, P> {
      */
 
     public Node add(E e, P priority) {
-
-        // YOUR CODE GOES HERE
-        return null;
+        // Create a new Node with the current size as its index.
+        Node newNode = new Node(e, priority, tree.size());
+        tree.add(newNode);
+        // Restore the min-heap property by pulling up the new node.
+        pullUp(newNode.idx);
+        return newNode;
     }
+
+
+
 
 
     /**
@@ -167,8 +173,13 @@ class PriorityQueue<E, P> {
      */
 
     public boolean contains(E e) {
-
-        // ADD YOUR CODE HERE
+        // Iterate over each node in the heap.
+        for (Node node : tree) {
+            // Use isValid() to ensure the node has not been removed.
+            if (node.isValid() && node.value.equals(e)) {
+                return true;
+            }
+        }
         return false;
     }
 
